@@ -6,22 +6,36 @@
 Fast, 120Hz-optimized reader with an app-wide Celestial Carbon & Violet-Cyan-Sakura aesthetic, spring-animated navigation icons, floating pill Reader HUD, episode thumbnail previews, automatic Keiyoushi extension updates, and end-to-end AES-256-GCM automatic Supabase account syncing.
 
 [![Latest Release](https://img.shields.io/github/v/release/Boladale-01/Tsukiyomi?label=Latest%20Release&color=9D7BFF&style=for-the-badge)](https://github.com/Boladale-01/Tsukiyomi/releases/latest)
-[![Download APK](https://img.shields.io/badge/Download%20APK-v0.25.0%20(arm64)-38BDF8?style=for-the-badge&logo=android&logoColor=white)](https://github.com/Boladale-01/Tsukiyomi/releases/download/v0.25.0/Tsukiyomi-arm64-v8a-v0.25.0.apk)
+[![Download APK](https://img.shields.io/badge/Download%20APK-v0.26.0%20(arm64)-38BDF8?style=for-the-badge&logo=android&logoColor=white)](https://github.com/Boladale-01/Tsukiyomi/releases/download/v0.26.0/Tsukiyomi-arm64-v8a-v0.26.0.apk)
 
 </div>
 
 ---
 
-## Direct APK Download (`v0.25.0`)
+## Direct APK Download (`v0.26.0`)
 
 - **Latest Release (arm64-v8a — S23 Ultra & Modern Android Phones):**  
-  [**Download Tsukiyomi-arm64-v8a-v0.25.0.apk**](https://github.com/Boladale-01/Tsukiyomi/releases/download/v0.25.0/Tsukiyomi-arm64-v8a-v0.25.0.apk)
+  [**Download Tsukiyomi-arm64-v8a-v0.26.0.apk**](https://github.com/Boladale-01/Tsukiyomi/releases/download/v0.26.0/Tsukiyomi-arm64-v8a-v0.26.0.apk)
 - **All Releases:**  
   [https://github.com/Boladale-01/Tsukiyomi/releases](https://github.com/Boladale-01/Tsukiyomi/releases)
 
 ---
 
-## Highlights in `v0.25.0`
+## Highlights in `v0.26.0`
+
+- **R8-Minified Production-Speed Release (`devRelease`):**
+  - Ships non-debuggable R8-shrunk APKs signed for in-place updates so compose UI, image decoding, and navigation run without debug-build overhead.
+- **WEBTOON-Style Lightweight Delta Sync:**
+  - Eliminates full `.tachibk` exports and multi-MB vault re-uploads during reading and chapter marking; syncs lightweight AES-256-GCM gzipped delta feeds (~1–3 KB) over WebSocket broadcast + `handle`/`updated_at` while reserving full vault uploads for structural library/category/extension changes.
+  - Stops unnecessary 5s REST polling whenever Realtime WebSocket is live (switching to reconnect + foreground catch-up + 45s offline fallback) and flushes pending progress on app background.
+- **Reliable Unseen Recommendations:**
+  - Home recommendations reactively wait for extensions to initialize, prioritize your active/language-matched sources, and strictly exclude library series, reading history, finished/non-library read titles, and cross-source duplicates, with clean loading and Retry controls.
+- **Faster Chapter Thumbnails & Continue Reading:**
+  - Downsamples and crops cached JPEG chapter thumbnails (`ChapterThumbnailFetcher` v2) and removes stacked dual-image/alpha-layer overdraw on chapter rows (`MangaChapterListItem`), plus parallelizes Continue Reading loading.
+
+---
+
+## Previous Highlights (`v0.25.0`)
 
 - **Instant Always-On Sync (Phone <-> Tablet via Supabase Realtime):**
   - Live **Supabase Realtime Broadcast WebSockets** stream reading page updates and chapter completions between your signed-in devices within milliseconds while persisting coalesced AES-256-GCM snapshots to `public.tsukiyomi_accounts`.
